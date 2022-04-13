@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2 class="border-bottom py-2">Delete: {{ article.title }}</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="confirmation_string" class="form-label">Article 삭제 확인</label>
+        {% if form.confirmation_string.errors %}
+        <input type="text" class="form-control is-invalid" name="confirmation_string" id="confirmation_string">
+        <div id="confirmHelpBlock" class="invalid-feedback">
+            Article을 삭제하려면 article 제목을 정확히 입력하세요.
+        </div>
+        {% else %}
+        <input type="text" class="form-control" name="confirmation_string" id="confirmation_string">
+        <div id="confirmHelpBlock" class="form-text">
+            Article을 삭제하려면 article 제목을 정확히 입력하세요.
+        </div>
+        {% endif %}        
+    </div>
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+{% endblock %}

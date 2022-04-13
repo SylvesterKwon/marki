@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<!-- Article -->
+<div class="d-flex justify-content-between border-bottom py-2">
+    <h2>{{ article_title }}</h2>
+</div>
+<div class="card my-3">
+    <div class="card-body">
+        <div class="card-text">
+            <p>{{ article_title }} 문서가 존재하지 않습니다.</p>
+            <form class="d-flex" id="create_with_name" method="get" action="{% url 'wiki:article_create' %}">
+                <input type="hidden" id="q" name="q" value="{{ article_title }}">
+                <button class="btn btn-success" type="submit">{{ article_title }} 문서 새로 작성하기</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

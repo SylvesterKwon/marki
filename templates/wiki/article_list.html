@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% load wiki_filter %}
+{% block content %}
+<h2 class="border-bottom py-2">Recent changes</h2>
+<table class="table">
+    <thead>
+        <tr class="table-dark">
+            <th>번호</th>
+            <th>제목</th>
+            <th>최근변경일자</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if article_list %}
+        {% for article in article_list %}
+        <tr>
+            <td>
+                {{ article_list.paginator.count|sub:article_list.start_index|sub:forloop.counter0|add:1 }}
+            </td>
+            <td>
+                <a href="{% url 'wiki:article' article.title %}">{{ article.title }}</a>
+            </td>
+            <td>{{ article.create_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">Article이 없습니다.</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+<ul class="pagination justify-content-center">
+    {% if article_list.has_previous %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ article_list.previous_page_number }}">이전</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+    </li>
+    {% endif %}
+    {% for page_number in article_list.paginator.page_range %}
+    {% if page_number >= article_list.number|add:-5 and page_number <= article_list.number|add:5 %}
+    {% if page_number == article_list.number %}
+    <li class="page-item active" aria-current="page">
+        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+    </li>
+    {% else %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+    </li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% if article_list.has_next %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ article_list.next_page_number }}">다음</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+    </li>
+    {% endif %}
+</ul>
+<a href="{% url 'wiki:article_create' %}" class="btn btn-primary">Article 작성하기</a>
+{% endblock %}

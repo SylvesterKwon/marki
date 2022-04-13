@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container my-3">
+    <h2 class="justify-content-between border-bottom py-2">Sign up</h2>
+    <form method="post" action="{% url 'common:signup' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username">사용자 이름</label>
+            {% if form.username.errors %}
+            <input type="text" class="form-control is-invalid" name="username" id="username"
+                   value="{{ form.username.value|default_if_none:'' }}">
+            <div id="usernameHelpBlock" class="invalid-feedback">
+                {{ form.username.errors }}
+            </div>    
+            {% else %}
+            <input type="text" class="form-control" name="username" id="username"
+                   value="{{ form.username.value|default_if_none:'' }}">
+            {% endif %}            
+        </div>
+        <div class="mb-3">
+            <label for="password1">비밀번호</label>
+            {% if form.password1.errors or form.password2.errors %}
+            <input type="password" class="form-control is-invalid" name="password1" id="password1"
+                   value="{{ form.password1.value|default_if_none:'' }}">
+            <div id="password1HelpBlock" class="invalid-feedback">
+                {{ form.password1.errors }}
+            </div>   
+            {% else %}
+            <input type="password" class="form-control" name="password1" id="password1"
+                   value="{{ form.password1.value|default_if_none:'' }}">
+            {% endif %}            
+        </div>
+        <div class="mb-3">
+            <label for="password2">비밀번호 확인</label>
+            {% if form.password1.errors or form.password2.errors %}
+            <input type="password" class="form-control is-invalid" name="password2" id="password2"
+                   value="{{ form.password2.value|default_if_none:'' }}">
+            <div id="password2HelpBlock" class="invalid-feedback">
+                {{ form.password2.errors }}
+            </div>                      
+            {% else %}
+            <input type="password" class="form-control" name="password2" id="password2"
+                   value="{{ form.password2.value|default_if_none:'' }}">
+            {% endif %}            
+        </div>
+        <div class="mb-3">
+            <label for="email">이메일</label>
+            {% if form.email.errors %}
+            <input type="text" class="form-control is-invalid" name="email" id="email"
+                   value="{{ form.email.value|default_if_none:'' }}">
+            <div id="emailHelpBlock" class="invalid-feedback">
+            {{ form.email.errors }}
+            </div>   
+            {% else %}
+            <input type="text" class="form-control" name="email" id="email"
+                   value="{{ form.email.value|default_if_none:'' }}">
+            {% endif %}            
+        </div>
+        <button type="submit" class="btn btn-primary">Sign up!</button>
+    </form>
+</div>
+{% endblock %}

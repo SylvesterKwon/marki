@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2 class="justify-content-between border-bottom py-2">아티클 등록</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">제목</label>
+        {% if form.title.errors %}
+        <input type="text" class="form-control is-invalid" name="title" id="title" value="{{ form.title.value|default_if_none:'' }}">
+        <div id="titleHelpBlock" class="invalid-feedback">
+            {{ form.title.errors }}
+        </div>
+        {% else %}
+        <input type="text" class="form-control" name="title" id="title" value="{{ form.title.value|default_if_none:'' }}">
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="content" class="form-label">내용</label>
+        {% if form.content.errors %}
+        <textarea class="form-control is-invalid" name="content"
+            id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+        <div id="contentHelpBlock" class="invalid-feedback">
+            {{ form.content.errors }}
+        </div>
+        {% else %}
+        <textarea class="form-control" name="content"
+            id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+        {% endif %}            
+    </div>
+    <button type="submit" class="btn btn-primary">저장하기</button>
+</form>
+{% endblock %}
