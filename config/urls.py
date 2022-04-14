@@ -23,3 +23,5 @@ urlpatterns = [
     path('wiki/', include('wiki.urls')),
     path('admin/', admin.site.urls),
 ]
+
+handler404 = 'common.views.page_not_found'
