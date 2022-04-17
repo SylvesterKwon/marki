@@ -17,5 +17,5 @@ urlpatterns = [
     path('<str:article_title>/delete/', article_views.article_delete, name='article_delete'),
 
     # views/comment_views
-    path('<str:article_title>/comment/create/', comment_views.comment_create, name='comment_create'),
+    path('<str:article_title>/comment/', comment_views.comment_create, name='comment_create'),
 ]

@@ -57,9 +57,16 @@
     </div>
     {% endif %}
     <div class="mb-3">
-        <label for="content" class="form-label">댓글 내용</label>
-        <textarea name="content" id="content" class="form-control" rows="3"></textarea>
+        <label for="content" class="form-label">Comment 내용</label>
+        {% if form.content.errors %}
+        <textarea name="content" id="content" class="form-control is-invalid" rows="3">{{ form.content.value|default_if_none:'' }}</textarea>
+        <div id="contentHelpBlock" class="invalid-feedback">
+            {{ form.content.errors }}
+        </div>
+        {% else %}
+        <textarea name="content" id="content" class="form-control" rows="3">{{ form.content.value|default_if_none:'' }}</textarea>
+        {% endif %}        
     </div>
-    <input type="submit" value="댓글 등록" class="btn btn-primary">
+    <input type="submit" value="Comment 등록" class="btn btn-primary">
 </form>
 {% endblock %}
