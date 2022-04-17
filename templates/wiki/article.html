@@ -44,18 +44,6 @@
 
 <form action="{% url 'wiki:comment_create' article.title %}" method="post" class="my-3">
     {% csrf_token %}
-    {% if form.errors %}
-    <div class="alert alert-danger" role="alert">
-        {% for field in form %}
-        {% if field.errors %}
-        <div>
-            <strong>{{ field.label }}</strong>
-            {{ field.errors }}
-        </div>
-        {% endif %}
-        {% endfor %}
-    </div>
-    {% endif %}
     <div class="mb-3">
         <label for="content" class="form-label">Comment 내용</label>
         {% if form.content.errors %}
