@@ -19,13 +19,13 @@
         <label for="content" class="form-label">내용</label>
         {% if form.content.errors %}
         <textarea class="form-control is-invalid" name="content"
-            id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+            id="content" rows="20">{{ form.content.value|default_if_none:'' }}</textarea>
         <div id="contentHelpBlock" class="invalid-feedback">
             {{ form.content.errors }}
         </div>
         {% else %}
         <textarea class="form-control" name="content"
-            id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+            id="content" rows="20">{{ form.content.value|default_if_none:'' }}</textarea>
         {% endif %}            
     </div>
     <button type="submit" class="btn btn-primary">저장하기</button>
