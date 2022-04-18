@@ -15,9 +15,9 @@ def sub(value, arg):
 def mark(value):
     extensions = ["fenced_code", "codehilite", "wikilinks", "toc", "sane_lists", "mdx_wikilink_plus"]
     extension_configs = {
-        "codehilite":{
-            "use_pygments": "True",
-        },
+        # "codehilite":{
+        #     "use_pygments": "True",
+        # },
         "wikilinks":{
             "base_url": "/wiki/",
         },
