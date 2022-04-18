@@ -7,8 +7,8 @@
     <h2>{{ article.title }}</h2>
     <div class="d-grip gap-2 d-md-flex">
         <div class="d-grid gap-2 d-md-block">
-            <a class="btn btn-primary" type="button" role="button" href="edit">Edit</a>
-            <a class="btn btn-primary" type="button" role="button" href="history">History</a>
+            <a class="btn btn-primary" type="button" role="button" href="{% url 'wiki:article_edit' article.title %}">Edit</a>
+            <a class="btn btn-primary disabled" type="button" role="button" href="history">History</a>
         </div>
     </div>
 </div>

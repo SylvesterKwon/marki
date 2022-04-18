@@ -2,17 +2,16 @@
 
 {% block content %}
 <div class="d-flex justify-content-between border-bottom py-2">
-    <h2>Edit: {{ form.title.value }}</h2>
+    <h2>Edit: {{ article_title }}</h2>
     <div class="d-grip gap-2 d-md-flex">
         <div class="d-grid gap-2 d-md-block">
-            <a class="btn btn-danger" type="button" role="button" href="delete">Delete</a>
+            <a class="btn btn-danger" type="button" role="button" href="{% url 'wiki:article_delete' article_title %}">Delete</a>
         </div>
     </div>
 </div>
 
 <form method="post">
     {% csrf_token %}
-    <!-- 오류표시 Start -->
     {% if form.errors %}
     <div class="alert alert-danger" role="alert">
         {% for field in form %}

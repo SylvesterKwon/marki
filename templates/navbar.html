@@ -14,31 +14,35 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
+                        특수 기능
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#">미구현</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li>
-                {% if user.is_superuser %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin">Admin</a>
-                </li>
-                {% endif %}
             
             </ul>
             <div class="d-flex gap-2">
                 <div class="d-flex gap-2">
                     {% if user.is_authenticated %}
-                    <a class="btn btn-link" href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
+                    <div class="nav-item dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" id="userDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.username }}
+                        </button>
+                        <ul class="dropdown-menu"></a>
+                            <li><a class="dropdown-item" href="#"> 사용자 문서 (미구현)</a></li>
+                            <li><a class="dropdown-item" href="#"> 사용자 설정 (미구현)</a></li>
+                            <li><a class="dropdown-item" href="#"> 기여 내역 (미구현)</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            {% if user.is_superuser %}
+                            <li><a class="dropdown-item text-danger" href="/admin">Admin</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item text-danger" href="{% url 'common:logout' %}">Log out</a></li>
+                        </ul>
+                    </li>
                     {% else %}
                     <a class="btn btn-primary" href="{% url 'common:login' %}">Login</a>
                     <a class="btn btn-secondary" href="{% url 'common:signup' %}">Sign up</a>

@@ -37,7 +37,7 @@ def article_edit(request, article_title):
             return redirect('wiki:article', article_title=article.title)
     else:
        form = ArticleEditForm(instance=article)
-    context = {'form': form} 
+    context = {'form': form, 'article_title': article_title} 
     return render(request, 'wiki/article_form_edit.html', context)
 
 @login_required(login_url='common:login')
