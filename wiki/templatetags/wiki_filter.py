@@ -13,7 +13,7 @@ def sub(value, arg):
 
 @register.filter()
 def mark(value):
-    extensions = ["fenced_code", "codehilite", "wikilinks", "toc"]
+    extensions = ["fenced_code", "codehilite", "wikilinks", "toc", "sane_lists"]
     extension_configs = {
         "codehilite":{
             "use_pygments": "True",
