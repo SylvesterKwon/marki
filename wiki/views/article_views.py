@@ -21,7 +21,7 @@ def article_create(request):
             form.fields['title'].initial = request.GET.get('q')
         except:
             pass
-    context = {'form': form}
+    context = {'title': '새 문서', 'form': form}
     return render(request, 'wiki/article_form_create.html', context)
 
 
@@ -37,7 +37,7 @@ def article_edit(request, article_title):
             return redirect('wiki:article', article_title=article.title)
     else:
        form = ArticleEditForm(instance=article)
-    context = {'form': form, 'article_title': article_title} 
+    context = {'title': '편집: '+article_title, 'form': form, 'article_title': article_title} 
     return render(request, 'wiki/article_form_edit.html', context)
 
 @login_required(login_url='common:login')
@@ -52,5 +52,5 @@ def article_delete(request, article_title):
     else:
         form = ArticleDeleteConfirmationForm(article_title=article_title)
 
-    context = {'article': article, 'form': form}
+    context = {'title': '삭제: '+article_title, 'article': article, 'form': form}
     return render(request, 'wiki/article_form_delete.html', context)

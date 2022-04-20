@@ -34,6 +34,7 @@ def mark(value):
             #'url_case': 'lowercase',
             'html_class': 'a-custom-class',
             #'build_url': build_url, # A callable
+            'url_whitespace': ' '
         },
     }
 

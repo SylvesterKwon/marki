@@ -15,8 +15,9 @@ def signup(request):
             return redirect('wiki:index')
     else:
         form = UserForm()
-    return render(request, 'common/signup.html', {'form': form})
+    context = {'title': '회원가입', 'form': form}
+    return render(request, 'common/signup.html', context)
 
 
 def page_not_found(request, exception):
-    return render(request, 'common/404.html')
+    return render(request, 'common/404.html', {'title': '404'})
