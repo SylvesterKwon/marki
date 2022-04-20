@@ -39,4 +39,9 @@ def article_search(request):
 
 
 def main_page(request):
-    return render(request, 'wiki/main_page.html')
+    intro = Article.objects.get(title="_Alkorithms 소개")
+    etc = Article.objects.get(title="_기타 문서")
+    emaxx_proj = Article.objects.get(title="_E-maxx Algorithms 한국어 현지화 프로젝트")
+
+    context = {'intro': intro, 'etc': etc, 'emaxx_proj': emaxx_proj}
+    return render(request, 'wiki/main_page.html', context)

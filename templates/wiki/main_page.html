@@ -1,6 +1,47 @@
 {% extends 'layout.html' %}
-
+{% load wiki_filter %}
 {% block content %}
 <h2 class="justify-content-between border-bottom py-2">대문</h2>
-<p>이곳에 대문이 표시될 것입니다.</p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h1 class="card-title mb-3">Alkorithms에 오신것을 환영합니다!</h5>
+        <p class="card-text">P는 NP가 아닙니다!</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card mb-3">
+            <div class="card-header">Alkorithms는...</div>
+            <div class="card-body">
+                <div class="card-text">{{ intro.content|mark }}</div>
+                <h5 class="card-title">이런, 찾는 문서가 없으세요?</h5>
+                <a href="{% url 'wiki:article_create' %}" class="btn btn-primary">새 문서 작성하기</a>
+            </div>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">E-maxx Algorithms 한국어 현지화 프로젝트</div>
+            <div class="card-body">
+                <div class="card-text">{{ emaxx_proj.content|mark }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card mb-3">
+            <div class="card-header">재미없는 문서</div>
+            <div class="card-body">
+                <div class="card-text">{{ etc.content|mark }}</div>
+            </div>
+        </div>
+        <div class="card mb">
+            <div class="card-header">변경 사항</div>
+            <div class="card-body">
+                이곳에 업데이트 내용이 표시될 것입니다.
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}
