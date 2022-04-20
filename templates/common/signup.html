@@ -2,6 +2,9 @@
 {% block content %}
 <div class="container my-3">
     <h2 class="justify-content-between border-bottom py-2">Sign up</h2>
+    <div class="alert alert-warning" role="alert">
+        죄송합니다, 현재는 Alkorithms에 가입하실 수 없습니다.
+    </div>
     <form method="post" action="{% url 'common:signup' %}">
         {% csrf_token %}
         <div class="mb-3">
@@ -56,7 +59,7 @@
                    value="{{ form.email.value|default_if_none:'' }}">
             {% endif %}            
         </div>
-        <button type="submit" class="btn btn-primary">Sign up!</button>
+        <button type="submit" class="btn btn-primary disabled">Sign up!</button>
     </form>
 </div>
 {% endblock %}
