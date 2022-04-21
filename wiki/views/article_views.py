@@ -42,7 +42,6 @@ def article_edit(request, article_title):
 
 @login_required(login_url='common:login')
 def article_delete(request, article_title):
-    # TODO: article delete 기능 구현, confirmation page 까지
     article = get_object_or_404(Article, title=article_title)
     if request.method == "POST":
         form = ArticleDeleteConfirmationForm(request.POST, article_title=article_title)

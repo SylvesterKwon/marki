@@ -14,5 +14,6 @@ urlpatterns = [
     path('<str:article_title>/', base_views.article, name='article'),
     path('<str:article_title>/edit/', article_views.article_edit, name='article_edit'),
     path('<str:article_title>/delete/', article_views.article_delete, name='article_delete'),
-    path('<str:article_title>/comment/', comment_views.comment_create, name='comment_create'),
+    path('<str:article_title>/new_comment/', comment_views.comment_create, name='comment_create'),
+    path('<str:article_title>/comments/<str:comment_id>', comment_views.comment_delete, name='comment_delete'),
 ]

@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container my-3">
+    <h2 class="justify-content-between border-bottom py-2">설정</h2>
+    <form method="post" action="{% url 'common:settings' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="old_password">이전 비밀번호</label>
+            {% if form.old_password.errors %}
+            <input type="password" class="form-control is-invalid" name="old_password" id="id_old_password"
+                   value="{{ form.old_password.value|default_if_none:'' }}">
+            <div id="old_passwordHelpBlock" class="invalid-feedback">
+                {{ form.old_password.errors }}
+            </div>   
+            {% else %}
+            <input type="password" class="form-control" name="new_password1" id="id_new_password1"
+                   value="{{ form.new_password1.value|default_if_none:'' }}">
+            {% endif %}            
+        </div>
+        <div class="mb-3">
+            <label for="new_password1">새 비밀번호</label>
+            {% if form.new_password1.errors or form.new_password2.errors %}
+            <input type="password" class="form-control is-invalid" name="new_password1" id="id_new_password1"
+                   value="{{ form.new_password1.value|default_if_none:'' }}">
+            <div id="new_password1HelpBlock" class="invalid-feedback">
+                {{ form.new_password1.errors }}
+            </div>   
+            {% else %}
+            <input type="password" class="form-control" name="new_password1" id="id_new_password1"
+                   value="{{ form.new_password1.value|default_if_none:'' }}">
+            {% endif %}            
+        </div>
+        <div class="mb-3">
+            <label for="new_password2">새 비밀번호 확인</label>
+            {% if form.new_password1.errors or form.new_password2.errors %}
+            <input type="password" class="form-control is-invalid" name="new_password2" id="id_new_password2"
+                   value="{{ form.new_password2.value|default_if_none:'' }}">
+            <div id="id_new_password2HelpBlock" class="invalid-feedback">
+                {{ form.new_password2.errors }}
+            </div>                      
+            {% else %}
+            <input type="password" class="form-control" name="new_password2" id="id_new_password2"
+                   value="{{ form.new_password2.value|default_if_none:'' }}">
+            {% endif %}            
+        </div>
+        <button type="submit" class="btn btn-primary">Apply</button>
+    </form>
+</div>
+{% endblock %}

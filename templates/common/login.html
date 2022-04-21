@@ -3,6 +3,13 @@
 {% block content %}
 <div class="container my-3">
     <h2 class="justify-content-between border-bottom py-2">Login</h2>
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+            {{ error }}
+        {% endfor %}
+    </div>
+    {% endif %}
     <form method="post" action="{% url 'common:login' %}">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">

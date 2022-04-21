@@ -5,7 +5,7 @@
 <div class="d-flex justify-content-between border-bottom py-2">
     <!-- <h2><a href=".">{{ article.title }}</a></h2> -->
     <h2>{{ article.title }}</h2>
-    <div class="d-grip gap-2 d-md-flex">
+    <div class="d-grid gap-2 d-md-flex">
         <div class="d-grid gap-2 d-md-block">
             <a class="btn btn-primary" type="button" role="button" href="{% url 'wiki:article_edit' article.title %}">Edit</a>
             <a class="btn btn-primary disabled" type="button" role="button" href="history">History</a>
@@ -22,17 +22,26 @@
 <h5 class="border-bottom my-3 py-2">{{article.comment_set.count}}개의 리뷰가 있습니다.</h5>
 {% for comment in article.comment_set.all %}
 <div class="card my-3">
-    <div class="card-body">
-        <div class="card-text" style="white-space: pre-line;">{{ comment.content }}</div>
-        <div class="d-flex justify-content-end">
-            <div class="badge bg-light text-dark p-2">
-                {% if comment.author %}
-                {{ comment.author.username }}
-                |
-                {% endif %}
-                {{ comment.create_date }}
-            </div>
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+            {% if comment.author %}
+            {{ comment.author.username }}
+            {% else %}
+            Anonymous
+            {% endif %}
+            ({{ comment.create_date }})
         </div>
+        <div>
+            {% if user == comment.author %}
+            <form action="{% url 'wiki:comment_delete' article.title comment.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete" class="btn btn-sm btn-danger">
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-text" style="white-space: pre-line;">{{ comment.content }}</div>    
     </div>
 </div>
 {% endfor %}
@@ -40,7 +49,7 @@
 <form action="{% url 'wiki:comment_create' article.title %}" method="post" class="my-3">
     {% csrf_token %}
     <div class="mb-3">
-        <label for="content" class="form-label">Comment 내용</label>
+        <label for="content" class="form-label">Comment 입력</label>
         {% if form.content.errors %}
         <textarea name="content" id="content" class="form-control is-invalid" rows="3">{{ form.content.value|default_if_none:'' }}</textarea>
         <div id="contentHelpBlock" class="invalid-feedback">
