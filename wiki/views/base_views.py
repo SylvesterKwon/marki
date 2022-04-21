@@ -1,10 +1,10 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from ..models import Article
+import random
 
 def index(request):
-    # TODO: index 페이지 구현
-    return redirect('wiki:main_page') # 임시로 아티클 목록으로 연결
+    return redirect('wiki:main_page')
 
 
 def articles(request):
@@ -43,5 +43,8 @@ def main_page(request):
     etc = Article.objects.get(title="_기타 문서")
     emaxx_proj = Article.objects.get(title="_E-maxx Algorithms 한국어 현지화 프로젝트")
 
-    context = {'title': '대문', 'intro': intro, 'etc': etc, 'emaxx_proj': emaxx_proj}
+    # motd list, must be seperated
+    motd = ['$P$는 $NP$가 아닙니다', '$O(N^2)$ 보단 $O(NlogN)$, $O(NlogN)$ 보단 $O(N)$', '자매품인 Data strucktures 도 만나보세요', '앨런 튜링 vs 폰 노이만', 'Codechef Ninjas haters', 'Algorithms 와는 다릅니다', 'Built with Django']
+
+    context = {'title': '대문', 'intro': intro, 'etc': etc, 'emaxx_proj': emaxx_proj, 'motd': random.choice(motd)}
     return render(request, 'wiki/main_page.html', context)
